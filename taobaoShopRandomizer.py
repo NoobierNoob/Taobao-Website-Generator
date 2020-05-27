@@ -26,7 +26,7 @@ websites.write(now.strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
 for _ in range(howLong2):
     value = randint(100000000, 999999999)
-    print(value)
+    #print(value)
 
     #Total site scanned counter
     siteNumber = siteNumber + 1
