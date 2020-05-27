@@ -25,9 +25,8 @@ now = datetime.datetime.now()
 websites.write(now.strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
 for _ in range(howLong2):
-    for _ in range(1):
-	    value = randint(100000000, 999999999)
-	    # print(value)
+    value = randint(100000000, 999999999)
+    print(value)
 
     #Total site scanned counter
     siteNumber = siteNumber + 1
