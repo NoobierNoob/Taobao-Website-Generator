@@ -1,6 +1,10 @@
 import sys
 import os
 import os.path
+import datetime
+from random import randint
+from urllib.request import urlopen
+import urllib.request
 
 #random stuff
 print("Welcome, this is Uzi#6900's basic Taobao website generator. \n It was made using python. When prompted, please state how many websites you want it to generate and check for keywords. \nAll websites with said keywords will be placed in websites.txt file that will generate. False positives may occur.")
@@ -17,15 +21,15 @@ siteNumber = 0
 successSite = 0
 
 #date stuff
-import datetime
 now = datetime.datetime.now()
 websites.write(now.strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
 for _ in range(howLong2):
-    from random import randint
     for _ in range(1):
 	    value = randint(100000000, 999999999)
 	    # print(value)
+
+    #Total site scanned counter
     siteNumber = siteNumber + 1
     
     #keywords
@@ -40,10 +44,6 @@ for _ in range(howLong2):
     taobao = '.taobao.com'
     testLink = 'https://shop112744646.taobao.com/'
     link = shop + str(value) + taobao
-
-    #request stuff
-    from urllib.request import urlopen
-    import urllib.request
 
     #searcher
     site = urllib.request.urlopen(link).read().decode('GBK', errors = 'ignore')
