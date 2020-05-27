@@ -5,9 +5,15 @@ import datetime
 from random import randint
 from urllib.request import urlopen
 import urllib.request
+from colorama import init,Fore, Back, Style
+from time import sleep
+init(autoreset=True)
 
 #random stuff
-print("Welcome, this is Uzi#6900's basic Taobao website generator. \n It was made using python. When prompted, please state how many websites you want it to generate and check for keywords. \nAll websites with said keywords will be placed in websites.txt file that will generate. False positives may occur.")
+print(Fore.CYAN + "Welcome, this is Uzi#6900's basic Taobao website generator.")
+print("It was made using python. When prompted, please state how many websites you want it to generate and check for keywords.\nAll websites with said keywords will be placed in websites.txt file that will generate.")
+print(Fore.YELLOW + Style.BRIGHT + "Edit keywords in keywords.txt")
+print(Fore.RED + Style.BRIGHT + "False positives may occur.")
 websites = open('./websites.txt', "a+")
 
 #date stuff
@@ -15,36 +21,42 @@ now = datetime.datetime.now()
 websites.write(now.strftime("%Y-%m-%d %H:%M:%S") + "\n")
 
 #Amount of times running
-howLong1 = input("How many times do you want it to run?")
-howLong2 = int(howLong1)
-print("Running " + str(howLong2) + " times")
+howLong1 = int(input("How many times do you want it to run?"))
+print("Running " + str(howLong1) + " times")
 print("Working! Stayed tuned for results")
 
 #variables
 siteNumber = 0
 successSite = 0
 
+#keywords
+words = ['.00', '价格', '物流', '抽绳', '潮牌', '描述']
 
-for _ in range(howLong2):
+try:
+    with open('./keywords.txt', "x", encoding="utf-8") as g:
+        g.write('.00\n' '价格\n' '物流\n' '抽绳\n' '潮牌\n' '描述\n')
+except FileExistsError:
+    print('Reading keywords')
+    with open('./keywords.txt' , "r", encoding="utf-8") as myFile:
+        words = myFile.read().splitlines()
+        print(words)
+
+#Looper
+for _ in range(howLong1):
     value = randint(100000000, 999999999)
     #print(value)
 
     #Total site scanned counter
     siteNumber = siteNumber + 1
-    
+    if siteNumber >= 500:
+        sleep(5)
     success = 0
 
-    #keywords
-    words = ['.00', 'palace', 'ader error', 'vlone', 'fog', 'fear of god', 'assc', 'anti', 'drew', 'supreme', '价格', 'cloth', 'fabric', 'clothing', '¥', '物流', 'kanye', '抽绳', '潮牌', '描述']
-    
-    #future keyword plans here??????
-    # keywords = open('./keywords.txt', "a+")
-    # keywords.write(str(words))
 
     #Gets link + puts together
     shop = 'https://shop'
     taobao = '.taobao.com'
-    testLink = 'https://nickrosen.city/sadfasdf'
+    testLink = 'https://shop62698926.taobao.com/.'
     link = shop + str(value) + taobao
 
     #searcher
@@ -57,7 +69,7 @@ for _ in range(howLong2):
     else:
         for word in words:
           if word in site:
-             print(siteNumber, word, link)
+             print(siteNumber, word, Fore.LIGHTRED_EX + link)
              success = 1
     print("Site " + str(siteNumber) + " scanned")
 
@@ -66,7 +78,7 @@ for _ in range(howLong2):
         websites.write(str(link) + "\n")
         successSite = successSite + 1
         
-print("Complete! Successfully found: " + str(successSite) + " websites with the keywords. Check websites.txt to see them.")
+print(Fore.GREEN + Style.BRIGHT + "Complete! Successfully found: " + str(successSite) + " websites with the keywords. Check websites.txt to see them.")
 
 #If results 0 write check
 if successSite == 0:
