@@ -5,7 +5,7 @@ import datetime
 from random import randint
 from urllib.request import urlopen
 import urllib.request
-from colorama import init,Fore, Back, Style
+from colorama import init, Fore, Back, Style
 from time import sleep
 init(autoreset=True)
 
